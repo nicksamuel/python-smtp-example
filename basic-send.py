@@ -1,10 +1,10 @@
 import smtplib
 
+smtp_user = 'XXXXXXXX'
+smtp_password = 'XXXXXXXX'
+smtp_server = "XXXXXXXX"
+smtp_port = XXX
 
-gmail_user = 'apikey'
-gmail_password = 'INSERT PASSWORD HERE'
-
-sent_from = gmail_user
 to = [input("Enter the email address you'd like to send to :")]
 subject = input("Enter the subject :")
 body = input("Enter the body :")
@@ -18,12 +18,12 @@ Subject: %s
 """ % (sent_from, ", ".join(to), subject, body)
 
 try:
-    server = smtplib.SMTP_SSL('smtp.sendgrid.com', 465)
+    server = smtplib.SMTP_SSL(smtp_server, smtp_port)
     server.ehlo()
-    server.login(gmail_user, gmail_password)
-    server.sendmail(sent_from, to, email_text)
+    server.login(smtp_user, smtp_password)
+    server.sendmail(smtp_user, to, email_text)
     server.close()
 
     print("Email sent!")
 except:
-    print('Something went wrong...')
+    print('Email not sent!')
